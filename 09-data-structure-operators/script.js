@@ -1,7 +1,6 @@
 'use strict';
 
 const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-
 const openingHours = {
   [weekdays[3]]: {
     open: 12,
@@ -11,7 +10,7 @@ const openingHours = {
     open: 11,
     close: 23,
   },
-  [`day-${2 + 4}`]: {
+  [weekdays[5]]: {
     open: 0, // Open 24 hours
     close: 24,
   },
@@ -51,7 +50,6 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
-
 // Coding Challenge #1
 const game = {
   team1: 'Bayern Munich',
@@ -94,6 +92,97 @@ const game = {
   },
 };
 
+// Coding Challenge #2
+
+// Let's continue with our football betting app!
+
+// 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+
+// 1.
+const scoredPlayerList = game.scored;
+
+for (const [goalIndex, scoredPlayer] of scoredPlayerList.entries()) {
+  console.log(`Goal ${goalIndex + 1}: ${scoredPlayer}`);
+}
+
+// 2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+
+// 2.
+let averageOdds = 0;
+for (const odd of Object.values(game.odds)) {
+  console.log(odd);
+  averageOdds += odd;
+}
+averageOdds /= Object.values(game.odds).length;
+console.log(averageOdds);
+
+// 3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+//       Odd of victory Bayern Munich: 1.33
+//       Odd of draw: 3.25
+//       Odd of victory Borrussia Dortmund: 6.5
+// Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+
+// 3.
+// first store the key and value of the odd.
+const oddEntries = Object.entries(game.odds);
+console.log(oddEntries);
+
+for (const [teamName, odd] of oddEntries) {
+  console.log(
+    `Odd of ${teamName === 'x' ? 'draw' : `victory ${game[teamName]}`}: ${odd}`
+  );
+}
+
+// BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+//       {
+//         Gnarby: 1,
+//         Hummels: 1,
+//         Lewandowski: 2
+//       }
+
+// GOOD LUCK 😀
+const scorers = {};
+for (const player of game.scored) {
+  if (scorers[player] === undefined) {
+    scorers[player] = 1;
+  } else {
+    scorers[player] += 1;
+  }
+}
+console.log(scorers);
+
+///////////////////////////////////////
+// Looping Objects: Object Keys, Values, and Entries
+
+// ///////////////////////
+// // Optional Chaining
+// if (restaurant.openingHours && restaurant.openingHours.mon)
+//   console.log(restaurant.openingHours.mon.open);
+
+// // console.log(restaurant.openingHours.mon.open);
+
+// // With optional chaining
+// console.log(restaurant.openingHours.mon?.open);
+// console.log(restaurant.openingHours?.mon?.open);
+
+// // Example
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+// for (const day of days) {
+//   const open = restaurant.openingHours[day]?.open ?? 'closed';
+//   console.log(`On ${day}, we open at ${open}`);
+// }
+
+// // Methods
+// console.log(restaurant.order?.(0, 1) ?? 'Method does not exist.');
+// console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist.');
+
+// // Arrays
+// const users = [{ name: 'Jonas', email: 'hello@jonas.io' }];
+// // const users = [];
+
+// console.log(users[0]?.name ?? 'User array empty');
+
 // ///////////////////////////
 // // The for-of loop
 // const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
@@ -109,6 +198,8 @@ const game = {
 
 // ///////////////////////////////////////
 // // Coding Challenge #1
+
+// Coding Challenge #1
 
 // /*
 // We're building a football betting app (soccer for my American friends 😅)!
