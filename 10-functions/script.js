@@ -244,55 +244,82 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-const poll = {
-  //question
-  question: 'What is your favourite programming language?',
+// const poll = {
+//   //question
+//   question: 'What is your favourite programming language?',
 
-  //programming language list
-  programmingList: ['JavaScript', 'Python', 'Rust', 'C++'],
+//   //programming language list
+//   programmingList: ['JavaScript', 'Python', 'Rust', 'C++'],
 
-  //printing all the programming language list to the console.
-  printProgrammingList() {
-    let programmingString = '';
-    for (const [index, language] of this.programmingList.entries()) {
-      programmingString += `${index}: ${language} \n`;
-    }
-    return programmingString + '(Write option number)';
-  },
+//   //printing all the programming language list to the console.
+//   printProgrammingList() {
+//     let programmingString = '';
+//     for (const [index, language] of this.programmingList.entries()) {
+//       programmingString += `${index}: ${language} \n`;
+//     }
+//     return programmingString + '(Write option number)';
+//   },
 
-  // registered new answer.
-  registeredNewAnswer() {
-    // prompt to get the number.
-    const answerNumber = Number(
-      prompt(`${this.question} \n ${this.printProgrammingList()}`)
-    );
-    console.log(answerNumber);
+//   // registered new answer.
+//   registeredNewAnswer() {
+//     // prompt to get the number.
+//     const answerNumber = Number(
+//       prompt(`${this.question} \n ${this.printProgrammingList()}`)
+//     );
+//     console.log(answerNumber);
 
-    // update the array.
-    typeof answerNumber === 'number' &&
-      answerNumber < this.answerArray.length &&
-      this.answerArray[answerNumber]++;
+//     // update the array.
+//     typeof answerNumber === 'number' &&
+//       answerNumber < this.answerArray.length &&
+//       this.answerArray[answerNumber]++;
 
-    this.displayResults();
-    this.displayResults('string');
-  },
-  answerArray: new Array(4).fill(0),
-  displayResults(type = 'array') {
-    if (type === 'string') {
-      console.log(`Poll resuls are ${this.answerArray.join(', ')}`);
-    } else if (type === 'array') {
-      console.log(this.answerArray);
-    }
-  },
+//     this.displayResults();
+//     this.displayResults('string');
+//   },
+//   answerArray: new Array(4).fill(0),
+//   displayResults(type = 'array') {
+//     if (type === 'string') {
+//       console.log(`Poll resuls are ${this.answerArray.join(', ')}`);
+//     } else if (type === 'array') {
+//       console.log(this.answerArray);
+//     }
+//   },
+// };
+
+// // poll.registeredNewAnswer();
+// // poll.printProgrammingList();
+// // console.log(poll.answerArray);
+
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registeredNewAnswer.bind(poll));
+
+// poll.displayResults.call({ answerArray: [5, 2, 3] }, 'string');
+// poll.displayResults.call({ answerArray: [1, 5, 3, 9, 6, 1] }, 'array');
+
+///////////////////////////////////
+// Immediately Invoked Function Expressions (IIFE)
+const runOnce = function () {
+  console.log('This will never run again');
 };
 
-// poll.registeredNewAnswer();
-// poll.printProgrammingList();
-// console.log(poll.answerArray);
+runOnce();
+runOnce();
 
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registeredNewAnswer.bind(poll));
+// IIFE
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
 
-poll.displayResults.call({ answerArray: [5, 2, 3] }, 'string');
-poll.displayResults.call({ answerArray: [1, 5, 3, 9, 6, 1] }, 'array');
+// console.log(isPrivate);
+
+(() => console.log('This will ALSO never run again'))();
+
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+
+console.log(isPrivate);
+console.log(notPrivate);
